@@ -10,7 +10,7 @@ Review the **Game Night Readiness** change implemented in Exercise 4:
 - `GET /api/game-nights/{id}/readiness`, and
 - the Readiness card in the game-night detail UI.
 
-The review focus is not general code style. It is whether the implementation truthfully reports a game night's readiness without changing existing manual-planning behavior.
+The review focus is not general code style. It is whether the implementation truthfully reports a game night's readiness without changing existing candidate-game planning behavior.
 
 ## Task
 
@@ -20,7 +20,9 @@ Extend `.claude/rubrics/code-review.md` with these concrete checks:
 2. **Selected games only:** An unsuitable candidate game that is *not* manually selected must not produce a manual-selection warning.
 3. **Duration rule:** The duration warning uses only manually selected games and is emitted when their total exceeds `available_minutes`.
 4. **Domain isolation:** The readiness evaluator can be tested without FastAPI, a database session, or React.
-5. **Non-destructive UI:** The Readiness card refreshes after a relevant successful update and never disables manual-planning controls.
+5. **Non-destructive UI:** The Readiness card refreshes after a relevant successful update and never disables attendee or candidate-game controls.
+
+The starter API already persists `manually_selected` on an attached game through `PUT /api/game-nights/{night_id}/games/{game_id}/selection`. The current UI intentionally does not expose a selection checkbox, so use an API fixture or direct setup when verifying the selected-game cases.
 
 Then ask the Reviewer agent:
 

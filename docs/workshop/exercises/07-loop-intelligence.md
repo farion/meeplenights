@@ -11,7 +11,7 @@ Use the failed Agent Alignment eval from Exercise 6 as input to a local improvem
 3. Update a copy of the Implementer context in `evals/agent-alignment/proposed-implementer-context.md`.
 4. Define a fourth, post-improvement simulated run. It must show the Implementer acknowledging the shared rules before coding and the Reviewer no longer repeating service-isolation or response-schema findings.
 5. Regrade runs 01–03 and the proposed run 04 with the Exercise 6 graders. Record whether repeated-finding rate and review-cycle count improve.
-6. Require human approval before applying the proposed context change to `.claude/agents/implementer.md` or shared repository guidance.
+6. Require human approval before applying the proposed context change to the configured Implementer agent file (for example `.claude/agents/implementer.md`) or shared repository guidance.
 
 ## Outcome
 

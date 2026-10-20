@@ -8,7 +8,7 @@ Use fictional session logs to find a mismatch in the multi-agent harness: the Re
 
 ## Material
 
-Read the agent definitions, coding guidelines, and three review cycles in [`workshop-assets/agent-alignment-eval/`](../../../workshop-assets/agent-alignment-eval/).
+Read the agent definitions and coding guidelines in [`workshop-assets/agent-alignment-eval/`](../../../workshop-assets/agent-alignment-eval/) and the three review cycles in its `sessions/` directory.
 
 ## Task
 
@@ -38,7 +38,7 @@ Define at least these graders:
 
 ### 2. Grade the logs
 
-For each of `run-01.md`, `run-02.md`, and `run-03.md`, record:
+For each of `sessions/run-01.md`, `sessions/run-02.md`, and `sessions/run-03.md`, record:
 
 - coding guidelines visible to the Implementer and Reviewer;
 - repeated finding categories;

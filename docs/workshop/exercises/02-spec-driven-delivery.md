@@ -21,6 +21,8 @@ The app already lets a host create a game night, attach attendees, and add candi
 
 For example, a host has four confirmed attendees, 180 available minutes, and candidate games Azul, Cascadia, Wingspan, and Betrayal at House on the Hill. One attendee excludes Horror and the group prefers medium-complexity strategy games.
 
+The current TableArchive integration reliably provides player counts and duration, but not categories or complexity. Treat category and comfort data as a product-data decision: the interview and design must state whether it is stored locally, manually curated, or excluded from the first slice.
+
 The feature could return:
 
 ```text
@@ -60,20 +62,31 @@ The facilitator reveals decisions only when asked relevant questions:
 
 Save the result in `docs/workshop/interview-summary.md`.
 
-## Part B: Story and Tickets
+## Part B: Build a Story-Shaping Skill
 
-Turn the interview into one user story with:
+Build a project skill at `.claude/skills/story-shaping/SKILL.md`. The skill must turn a requirements-interview summary into one implementation-ready user story and a set of independently reviewable tickets.
+
+Give the skill clear inputs, outputs, and constraints. It must:
+
+- use only confirmed interview decisions;
+- preserve unresolved questions instead of inventing answers;
+- distinguish product requirements from implementation choices; and
+- require observable acceptance criteria and verification for every ticket.
+
+Run the skill against `docs/workshop/interview-summary.md`. Save its result in `docs/workshop/smart-game-night-story.md`.
+
+The generated story must include:
 
 - scope and non-goals,
 - Given/When/Then acceptance criteria,
 - unresolved questions,
 - independently reviewable implementation tasks.
 
-Every task needs a purpose, affected area, dependencies, definition of done, and verification method. Avoid the anti-pattern `Implement Smart Game Night Plan` as one task.
+Every ticket needs a purpose, affected area, dependencies, definition of done, and verification method. Avoid the anti-pattern `Implement Smart Game Night Plan` as one ticket.
 
-## Part C: OpenSpec
+## Part C (Stretch Goal, optional): OpenSpec
 
-Use `openspec/changes/smart-game-night-plan/` to capture the approved change. Complete or improve:
+Use `openspec/changes/smart-game-night-plan/` to capture the approved change. The prepared artifacts are a facilitator reference, not requirements to copy blindly. Reconcile them with the recorded interview before completing or improving:
 
 - `proposal.md`
 - `design.md`
@@ -84,15 +97,16 @@ Do not begin implementation while product questions remain hidden or tasks canno
 
 ## Part D: Implement
 
-Use the Implementer agent:
+Use your configured Implementer agent or role prompt:
 
 ```text
-Implement only approved tasks from the Smart Game Night Plan OpenSpec change.
+Implement only approved tickets from `docs/workshop/smart-game-night-story.md`.
+If the optional OpenSpec change exists, keep the implementation aligned with it.
 Keep business rules testable outside HTTP and React.
 Stop and report ambiguities instead of inventing product behavior.
-Complete one task at a time, verify it, then update tasks.md.
+Complete one ticket at a time, verify it, then update the story file and, if present, `tasks.md`.
 ```
 
 ## Outcome
 
-An interview record, implementation-ready OpenSpec change, granular task plan, and a first verified implementation slice.
+An interview record, a reusable story-shaping skill, and a granular task plan. Teams completing the stretch goal also produce an implementation-ready OpenSpec change and a first verified implementation slice.

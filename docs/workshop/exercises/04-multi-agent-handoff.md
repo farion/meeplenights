@@ -13,8 +13,9 @@ Use Planner, Implementer, Reviewer, and Orchestrator to deliver the change.
 1. The Planner publishes the endpoint contract and dependency-ordered task plan.
 2. The Orchestrator gives the approved contract to both implementation tracks.
 3. Backend and frontend implementation may proceed in parallel only after the contract is approved.
-4. The Reviewer checks the result against the copied spec and `.claude/rubrics/code-review.md`.
-5. The Orchestrator classifies findings as blocking or advisory and does not complete the change while blocking findings remain.
+4. Before implementation, create `.claude/rubrics/code-review.md` with a minimal shared review baseline: contract compliance, deterministic domain rules, verification evidence, and no unrelated changes.
+5. The Reviewer checks the result against the copied spec and that rubric.
+6. The Orchestrator classifies findings as blocking or advisory and does not complete the change while blocking findings remain.
 
 Use the handoff prompts and expected artifacts in `workshop-assets/multi-agent-readiness/README.md`.
 

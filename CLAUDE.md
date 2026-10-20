@@ -9,6 +9,7 @@ Meeple Night is a local game-night planner. Runtime behavior must remain determi
 1. Read the relevant OpenSpec change and its `tasks.md`.
 2. Ask for clarification when product behavior is ambiguous.
 3. Keep domain rules in the backend, separately testable from HTTP and React.
+4. For library or framework APIs, use the Context7 MCP before relying on memory; use the version installed in this repository where relevant.
 
 ## Engineering conventions
 
@@ -17,9 +18,14 @@ Meeple Night is a local game-night planner. Runtime behavior must remain determi
 - Keep TableArchive calls isolated from core planning behavior and persist selected games locally in SQLite.
 - Add tests for changed backend behavior when a test framework has been introduced.
 - The Backpressure workshop exercise asks participants to introduce scoped quality gates. Do not assume a hook, linter, or test runner is configured in the starting project.
+- Preserve user work: inspect existing changes before editing and do not overwrite, reset, or delete unrelated files.
+- Validate changed frontend code with `npm run build` from `frontend/`. Run backend checks once the workshop has added them.
+- Keep credentials, local databases, virtual environments, and generated build output out of source control.
 
 ## Do not
 
 - Mark tasks complete if their acceptance criteria are not verified.
 - Silently choose behavior when a specification is contradictory.
 - Turn soft scoring preferences into hard exclusions unless the spec says so.
+- Use destructive commands (`rm -rf`, `git reset --hard`, `git clean`, or force-pushing) without explicit user approval.
+- Add runtime AI behavior, telemetry, or new external services without an approved specification.

@@ -5,12 +5,13 @@
 ## Task
 
 ```text
-Start the application and explore the API and UI. Do not edit code.
+Start the application using `QUICKSTART.md` and explore the API and UI. Do not edit code.
 Write docs/workshop/explore-notes.md answering:
 1. Which user journeys already work?
 2. What data is persisted?
 3. Which business rules are enforced?
 4. Which behavior is incomplete or risky?
+5. Which catalogue fields are available from TableArchive, and which product data would need local storage?
 ```
 
 ## Outcome
