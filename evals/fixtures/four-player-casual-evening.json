@@ -1,0 +1,9 @@
+{
+  "name": "four-player-casual-evening",
+  "confirmedAttendees": 4,
+  "availableMinutes": 180,
+  "preferredCategories": ["Strategy", "Nature"],
+  "excludedCategories": [],
+  "maxComplexity": 3,
+  "expected": { "status": "plan_found", "maxPlanMinutes": 162 }
+}

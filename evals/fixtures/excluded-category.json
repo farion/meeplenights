@@ -1,0 +1,9 @@
+{
+  "name": "excluded-category",
+  "confirmedAttendees": 4,
+  "availableMinutes": 150,
+  "preferredCategories": ["Mystery"],
+  "excludedCategories": ["Horror"],
+  "maxComplexity": 4,
+  "expected": { "status": "plan_found", "mustNotRecommendCategory": "Horror" }
+}

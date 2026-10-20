@@ -1,0 +1,10 @@
+{
+  "name": "no-valid-game",
+  "confirmedAttendees": 2,
+  "availableMinutes": 60,
+  "candidateGames": ["Betrayal at House on the Hill"],
+  "preferredCategories": [],
+  "excludedCategories": [],
+  "maxComplexity": 2,
+  "expected": { "status": "no_plan", "requiresExplanation": true, "requiresSuggestion": true }
+}
