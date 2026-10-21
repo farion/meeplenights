@@ -22,6 +22,7 @@ class CatalogueGame:
     min_players: int
     max_players: int
     duration_minutes: int
+    categories: tuple[str, ...]
 
 
 class TableArchiveClient:
@@ -31,10 +32,13 @@ class TableArchiveClient:
     def popular(self, limit: int) -> list[CatalogueGame]:
         return self._list_games("popular", {"kind": "board_game", "sort": "popular", "limit": str(limit)})
 
-    def search(self, query: str, limit: int) -> list[CatalogueGame]:
+    def search(self, query: str, limit: int, term: str | None = None) -> list[CatalogueGame]:
+        parameters = {"kind": "board_game", "q": query, "limit": str(limit)}
+        if term:
+            parameters["term"] = term
         return self._list_games(
-            f"search:{query.casefold()}",
-            {"kind": "board_game", "q": query, "limit": str(limit)},
+            f"search:{query.casefold()}:{term.casefold() if term else ''}",
+            parameters,
         )
 
     def game(self, catalogue_id: str) -> CatalogueGame:
@@ -66,12 +70,18 @@ class TableArchiveClient:
     @staticmethod
     def _parse_game(item: dict) -> CatalogueGame:
         data = item.get("data", {})
+        categories = tuple(
+            term["name"]
+            for term in item.get("terms", [])
+            if term.get("kind") == "category" and isinstance(term.get("name"), str)
+        )
         return CatalogueGame(
             catalogue_id=item["id"],
             name=item.get("name", "Unknown game"),
             min_players=data.get("min_players") or 1,
             max_players=data.get("max_players") or 1,
             duration_minutes=data.get("max_playtime") or data.get("min_playtime") or 0,
+            categories=categories,
         )
 
     @staticmethod

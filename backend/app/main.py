@@ -140,13 +140,17 @@ def popular_catalogue_games(limit: int = 8) -> list[CatalogueGameRead]:
 
 
 @app.get("/api/catalogue/search", response_model=list[CatalogueGameRead])
-def search_catalogue_games(query: str, limit: int = 10) -> list[CatalogueGameRead]:
-    if len(query.strip()) < 2:
-        raise HTTPException(status_code=422, detail="Search needs at least two characters")
+def search_catalogue_games(query: str = "", term: str | None = None, limit: int = 10) -> list[CatalogueGameRead]:
+    cleaned_query = query.strip()
+    cleaned_term = term.strip() if term else None
+    if len(cleaned_query) < 2 and not cleaned_term:
+        raise HTTPException(status_code=422, detail="Search needs at least two characters or a category term")
     try:
         return [
             catalogue_game_read(game)
-            for game in table_archive_client.search(query.strip(), min(max(limit, 1), 12))
+            for game in table_archive_client.search(
+                cleaned_query, min(max(limit, 1), 12), term=cleaned_term
+            )
         ]
     except TableArchiveUnavailableError as error:
         raise HTTPException(status_code=503, detail=str(error)) from error
@@ -252,7 +256,7 @@ def add_catalogue_game(night_id: int, catalogue_id: str, session: Session = Depe
             max_players=catalogue_game.max_players,
             duration_minutes=catalogue_game.duration_minutes,
             complexity=1,
-            categories="",
+            categories=",".join(catalogue_game.categories),
         )
         session.add(game)
         session.commit()

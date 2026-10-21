@@ -46,7 +46,7 @@ export const api = {
   deletePlayer: (playerId: number) => request<void>(`/api/players/${playerId}`, { method: "DELETE" }),
   listGames: () => request<BoardGame[]>("/api/games"),
   popularGames: () => request<CatalogueGame[]>("/api/catalogue/popular"),
-  searchGames: (query: string) => request<CatalogueGame[]>(`/api/catalogue/search?query=${encodeURIComponent(query)}`),
+  searchGames: (query: string, term?: string) => request<CatalogueGame[]>(`/api/catalogue/search?query=${encodeURIComponent(query)}${term ? `&term=${encodeURIComponent(term)}` : ""}`),
   createNight: (payload: Pick<GameNight, "title" | "scheduled_for" | "available_minutes">) =>
     request<GameNight>("/api/game-nights", { method: "POST", body: JSON.stringify(payload) }),
   updateNight: (nightId: number, payload: Pick<GameNight, "title" | "scheduled_for" | "available_minutes">) =>

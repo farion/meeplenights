@@ -1,7 +1,5 @@
 # Exercise 6: Evaluate Agent Alignment
 
-**Duration:** 40 minutes
-
 ## Goal
 
 Use fictional session logs to find a mismatch in the multi-agent harness: the Reviewer evaluates coding guidelines that the Implementer never receives. The outcome to evaluate is avoidable review churn, not the correctness of an individual implementation.
@@ -39,15 +37,6 @@ Record these definitions in `grader.md`:
 - **Desired outcome:** the Implementer satisfies known coding expectations before review, so a Reviewer does not repeatedly report the same preventable finding.
 - **Evaluation target:** compatibility of agent contexts and handoffs, not the personality or intelligence of either agent.
 
-Define at least these graders:
-
-| Grader | Pass condition | Impact when failed |
-| --- | --- |
-| Guideline visibility | Every blocking guideline used by the Reviewer is visible to the Implementer before its first code change. | blocking |
-| Repeated-finding rate | A guideline finding may appear once for an existing change, but must not recur in a later review without a newly introduced violation. | blocking |
-| Review-cycle count | A normal change with no new product decisions reaches an approval-ready review in at most two cycles. | should-fix |
-| Evidence quality | A Reviewer finding identifies the guideline, concrete source evidence, and a fix. | should-fix |
-
 The final result is `FAIL` if any blocking grader fails; otherwise it is `PASS`. Record failed `should-fix` graders in the scorecard even when the final result is `PASS`.
 
 ### 2. Grade the logs
@@ -63,7 +52,3 @@ For each of `sessions/run-01.md`, `sessions/run-02.md`, and `sessions/run-03.md`
 ### 3. State the evaluation result
 
 Draw the conclusion from the grader results and log evidence. Attribute repeated findings to the agent harness only when the logs show that the relevant expectation was unavailable to the Implementer.
-
-## Outcome
-
-An invoked evaluator that detects incompatible agent instructions through observable review churn and missing shared context, with written evidence and a visible result.

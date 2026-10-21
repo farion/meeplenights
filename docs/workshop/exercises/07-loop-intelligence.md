@@ -1,7 +1,5 @@
 # Exercise 7: Loop Intelligence
 
-**Duration:** 20 minutes
-
 ## Task
 
 Use the Exercise 6 scorecard as input to a local improvement loop.
