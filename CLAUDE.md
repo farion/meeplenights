@@ -6,7 +6,7 @@ Meeple Night is a local game-night planner. Runtime behavior must remain determi
 
 ## Before changing code
 
-1. Read the relevant OpenSpec change and its `tasks.md`.
+1. Read the delivery artifact named for the task: the relevant OpenSpec change and its `tasks.md`, or the approved story and its tickets for a story-driven delivery.
 2. Ask for clarification when product behavior is ambiguous.
 3. Keep domain rules in the backend, separately testable from HTTP and React.
 4. For library or framework APIs, use the Context7 MCP before relying on memory; use the version installed in this repository where relevant.

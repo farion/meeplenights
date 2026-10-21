@@ -4,15 +4,14 @@
 
 ## Task
 
-Use the failed Agent Alignment eval from Exercise 6 as input to a local improvement loop.
+Use the Exercise 6 scorecard as input to a local improvement loop.
 
-1. Classify the repeated Reviewer findings as a **harness context mismatch**, not as three independent implementation defects.
-2. Propose the smallest change that gives the Implementer the same blocking coding expectations as the Reviewer. For example: extract shared rules into a repository instruction file, reference it in both agents, and add an Implementer pre-review checklist.
-3. Update a copy of the Implementer context in `evals/agent-alignment/proposed-implementer-context.md`.
-4. Define a fourth, post-improvement simulated run. It must show the Implementer acknowledging the shared rules before coding and the Reviewer no longer repeating service-isolation or response-schema findings.
-5. Regrade runs 01–03 and the proposed run 04 with the Exercise 6 graders. Record whether repeated-finding rate and review-cycle count improve.
-6. Require human approval before applying the proposed context change to the configured Implementer agent file (for example `.claude/agents/implementer.md`) or shared repository guidance.
+1. Identify the highest-impact failed or `should-fix` grader. Use the scorecard evidence to explain whether its cause is in agent context, a handoff, a quality gate, or another part of the harness.
+2. Propose the smallest harness change that addresses that cause. Record the hypothesis, affected harness component, expected effect, and possible regression in `evals/agent-alignment/proposed-harness-change.md`.
+3. Define a representative fourth, post-change simulated run. Keep the product task comparable to the earlier runs and change only the proposed harness element.
+4. Grade the proposed run with the same Exercise 6 graders. Compare the affected grader results with runs 01–03 and record both improvement and regressions.
+5. Require human approval before applying the proposed change to configured agent definitions, shared repository guidance, or quality gates.
 
 ## Outcome
 
-A measured harness improvement: the team changes agent context based on eval evidence, then verifies that the specific failure mode no longer recurs.
+A measured, reversible harness-improvement proposal: a team derives a minimal change from eval evidence, verifies its intended effect and regressions, then obtains human approval before applying it.

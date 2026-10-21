@@ -42,8 +42,8 @@ The game picker queries the token-free [TableArchive](https://tablearchive.dev/)
 
 - Start with [`docs/workshop/agenda.md`](docs/workshop/agenda.md).
 - Work through the numbered instructions in [`docs/workshop/exercises/`](docs/workshop/exercises/).
-- The target change is prepared in [`openspec/changes/smart-game-night-plan/`](openspec/changes/smart-game-night-plan/).
-- Claude Code agent roles live in [`.claude/agents/`](.claude/agents/).
+- The prepared [OpenSpec change](openspec/changes/smart-game-night-plan/) is used for the optional second delivery run in Exercise 2; the primary run is story-driven.
+- In Exercise 4, participants create the Planner, Implementer, Merger, Reviewer, and Orchestrator roles in [`.claude/agents/`](.claude/agents/). Exercise 5 introduces the review rubric and restricts its access to the Reviewer. The `alignment-evaluator` role evaluates the fictional Exercise 6 scenario without access to those rubrics.
 - Deterministic evaluation fixtures live in [`evals/`](evals/).
 
 ## Current capabilities
@@ -61,4 +61,4 @@ The game picker queries the token-free [TableArchive](https://tablearchive.dev/)
 
 ## Quality baseline
 
-The Greenfield repository intentionally contains no test runner, linter, or Claude Code quality hook. Participants build those safeguards in the Backpressure exercise; see [`docs/workshop/exercises/03-backpressure.md`](docs/workshop/exercises/03-backpressure.md).
+The Greenfield repository intentionally contains no test runner, linter, or Claude Code quality hook. Participants add tests, linters, and a quality gate in the Backpressure exercise; path-scoped gates are an optional stretch goal. See [`docs/workshop/exercises/03-backpressure.md`](docs/workshop/exercises/03-backpressure.md).

@@ -12,12 +12,24 @@ Read the agent definitions and coding guidelines in [`workshop-assets/agent-alig
 
 ## Task
 
-Create `evals/agent-alignment/` containing:
+Run the dedicated evaluator from the repository root:
+
+```bash
+claude --agent alignment-evaluator
+```
+
+Give the evaluator a task that directs it to assess the complete scenario and create the required artifacts. Formulate that task yourselves.
+
+The evaluator must create `evals/agent-alignment/` containing:
 
 ```text
 grader.md       # measurable compatibility criteria
 scorecard.md    # findings and score for runs 01–03
 ```
+
+It must also return an `Agent-alignment evaluation: PASS | FAIL` result with
+the conclusion, supporting run evidence, and artifact paths. Review the
+generated files before accepting the result.
 
 ### 1. Define the task, outcome, and graders
 
@@ -29,12 +41,14 @@ Record these definitions in `grader.md`:
 
 Define at least these graders:
 
-| Grader | Pass condition |
+| Grader | Pass condition | Impact when failed |
 | --- | --- |
-| Guideline visibility | Every blocking guideline used by the Reviewer is visible to the Implementer before its first code change. |
-| Repeated-finding rate | A guideline finding may appear once for an existing change, but must not recur in a later review without a newly introduced violation. |
-| Review-cycle count | A normal change with no new product decisions reaches an approval-ready review in at most two cycles. |
-| Evidence quality | A Reviewer finding identifies the guideline, concrete source evidence, and a fix. |
+| Guideline visibility | Every blocking guideline used by the Reviewer is visible to the Implementer before its first code change. | blocking |
+| Repeated-finding rate | A guideline finding may appear once for an existing change, but must not recur in a later review without a newly introduced violation. | blocking |
+| Review-cycle count | A normal change with no new product decisions reaches an approval-ready review in at most two cycles. | should-fix |
+| Evidence quality | A Reviewer finding identifies the guideline, concrete source evidence, and a fix. | should-fix |
+
+The final result is `FAIL` if any blocking grader fails; otherwise it is `PASS`. Record failed `should-fix` graders in the scorecard even when the final result is `PASS`.
 
 ### 2. Grade the logs
 
@@ -48,15 +62,8 @@ For each of `sessions/run-01.md`, `sessions/run-02.md`, and `sessions/run-03.md`
 
 ### 3. State the evaluation result
 
-The expected conclusion must be evidence-based:
-
-```text
-The agents are misaligned. The Reviewer repeatedly enforces service isolation
-and response-schema rules that are absent from the Implementer context. The
-repeated findings are a harness design failure, not evidence that repeated
-review alone will improve the system.
-```
+Draw the conclusion from the grader results and log evidence. Attribute repeated findings to the agent harness only when the logs show that the relevant expectation was unavailable to the Implementer.
 
 ## Outcome
 
-An eval that detects incompatible agent instructions through observable review churn and missing shared context.
+An invoked evaluator that detects incompatible agent instructions through observable review churn and missing shared context, with written evidence and a visible result.

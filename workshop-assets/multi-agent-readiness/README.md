@@ -18,23 +18,8 @@ As a host, I want to see whether my game night is ready,
 so that I can resolve missing or invalid planning data before inviting people.
 ```
 
-## Suggested orchestration prompt
+## Delivery
 
-```text
-Deliver the approved `game-night-readiness` OpenSpec change using the
-Planner, Implementer, Reviewer, and Orchestrator agents.
-
-The Planner must publish the API contract before implementation starts.
-Backend and frontend work may proceed in parallel only after that contract
-is approved. The Reviewer must evaluate the result against the copied spec
-and the code-review rubric. Do not mark the change complete until all
-selected quality checks pass.
-```
-
-## Expected handoffs
-
-1. **Planner → all roles:** confirmed API response shape and dependency-ordered tasks.
-2. **Backend Implementer → Frontend Implementer:** endpoint and response contract, including empty `checks` behavior.
-3. **Implementers → Reviewer:** changed files, verification evidence, and intentionally unimplemented items.
-4. **Reviewer → Orchestrator:** findings classified as blocking or advisory.
-5. **Orchestrator → team:** final completion decision with evidence.
+This directory provides the scenario and its OpenSpec change only. Design the
+agent roles, their instructions, their handoffs, and the orchestration prompt
+in Exercise 4.

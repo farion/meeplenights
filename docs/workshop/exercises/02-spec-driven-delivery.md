@@ -1,10 +1,10 @@
-# Exercise 2: Spec Driven Delivery
+# Exercise 2: Story-Driven Delivery
 
 **Duration:** 2 hours 45 minutes
 
 ## Goal
 
-Turn an intentionally vague product intent into a tested first implementation slice using a requirements interview, OpenSpec, and the Implementer agent.
+Turn an intentionally vague product intent into a fully implemented, tested feature using a requirements interview, a set of user stories, and standard Claude Code. OpenSpec is an optional second delivery run after the story-driven implementation is complete.
 
 ## Starting intent
 
@@ -21,7 +21,7 @@ The app already lets a host create a game night, attach attendees, and add candi
 
 For example, a host has four confirmed attendees, 180 available minutes, and candidate games Azul, Cascadia, Wingspan, and Betrayal at House on the Hill. One attendee excludes Horror and the group prefers medium-complexity strategy games.
 
-The current TableArchive integration reliably provides player counts and duration, but not categories or complexity. Treat category and comfort data as a product-data decision: the interview and design must state whether it is stored locally, manually curated, or excluded from the first slice.
+The current TableArchive integration reliably provides player counts and duration, but not categories or complexity. Treat category and comfort data as a product-data decision: the interview and design must state whether it is stored locally, manually curated, or excluded from the initial delivery.
 
 The feature could return:
 
@@ -62,51 +62,90 @@ The facilitator reveals decisions only when asked relevant questions:
 
 Save the result in `docs/workshop/interview-summary.md`.
 
-## Part B: Build a Story-Shaping Skill
+## Part B: Build Story-Shaping Skills
 
-Build a project skill at `.claude/skills/story-shaping/SKILL.md`. The skill must turn a requirements-interview summary into one implementation-ready user story and a set of independently reviewable tickets.
+Build two project skills:
 
-Give the skill clear inputs, outputs, and constraints. It must:
+- `.claude/skills/to-story/SKILL.md` turns the requirements-interview summary into one implementation-ready user story.
+- `.claude/skills/to-ticket/SKILL.md` turns the approved story into independently reviewable implementation tickets.
+
+Give both skills clear inputs, outputs, and constraints. Together, they must:
 
 - use only confirmed interview decisions;
 - preserve unresolved questions instead of inventing answers;
 - distinguish product requirements from implementation choices; and
 - require observable acceptance criteria and verification for every ticket.
 
-Run the skill against `docs/workshop/interview-summary.md`. Save its result in `docs/workshop/smart-game-night-story.md`.
+Run `to-story` against `docs/workshop/interview-summary.md`. Save its result in `docs/workshop/smart-game-night-story.md`.
 
 The generated story must include:
 
 - scope and non-goals,
 - Given/When/Then acceptance criteria,
-- unresolved questions,
-- independently reviewable implementation tasks.
+- unresolved questions.
+
+Run `to-ticket` against the approved story. Save its result in `docs/workshop/smart-game-night-tickets.md`.
 
 Every ticket needs a purpose, affected area, dependencies, definition of done, and verification method. Avoid the anti-pattern `Implement Smart Game Night Plan` as one ticket.
 
-## Part C (Stretch Goal, optional): OpenSpec
+## Part C: Deliver the Complete Story Plan
 
-Use `openspec/changes/smart-game-night-plan/` to capture the approved change. The prepared artifacts are a facilitator reference, not requirements to copy blindly. Reconcile them with the recorded interview before completing or improving:
+Implement every approved ticket in `docs/workshop/smart-game-night-tickets.md`. The story and its acceptance criteria, together with the approved tickets, are the source of truth for this primary delivery run; do not use the prepared OpenSpec change as implementation instructions.
+
+Continue in the same standard Claude Code session. Do not configure or invoke an Implementer role; multi-agent roles are introduced in a later exercise. Give Claude Code this prompt:
+
+```text
+Implement every approved ticket from `docs/workshop/smart-game-night-tickets.md`.
+Use `docs/workshop/smart-game-night-story.md` and its acceptance criteria with
+the approved tickets as the source of truth for this delivery.
+Keep business rules testable outside HTTP and React.
+Stop and report ambiguities instead of inventing product behavior.
+Complete, verify, and mark every ticket before declaring the feature complete.
+```
+
+For each ticket, record the completed work and verification evidence in the tickets file. The primary run is complete only when all approved tickets are implemented and their acceptance criteria are verified.
+
+## Part D (Stretch Goal, optional): Repeat the Delivery with OpenSpec
+
+Repeat the same feature delivery in a clean worktree or fresh clone, this time using OpenSpec as the source of truth. Do not reuse the story-driven implementation as the solution; the point is to compare the two delivery approaches.
+
+Use the following OpenSpec workflow in a standard Claude Code session:
+
+| Command | Purpose | What to do |
+| --- | --- | --- |
+| `/opsx:explore` | Explore the idea before changing artifacts or code. | Discuss the confirmed interview decisions with Claude Code, inspect the existing application, and weigh implementation options. Keep unresolved product questions visible. |
+| `/opsx:propose` | Create a change folder with proposal, specs, design, and tasks. | Create a new change for this second run, reconcile it with the recorded interview, and review every generated artifact before approval. |
+| `/opsx:apply` | Deliver the approved change task by task. | Implement every task, verify it, and check it off only after its acceptance criteria pass. |
+| `/opsx:archive` | Merge accepted spec deltas and archive the completed change. | Run this only after the whole change is verified and accepted. |
+
+Start each phase explicitly with its command:
+
+```text
+/opsx:explore
+/opsx:propose
+/opsx:apply
+/opsx:archive
+```
+
+Choose a new change name, for example `smart-game-night-plan-openspec`. Leave the prepared `openspec/changes/smart-game-night-plan/` artifacts unchanged; they are facilitator reference material, not requirements to copy blindly. Once the newly proposed artifacts are reconciled with the recorded interview and approved, they become the source of truth for this delivery:
 
 - `proposal.md`
 - `design.md`
 - `tasks.md`
 - `specs/game-night-planning/spec.md`
 
-Do not begin implementation while product questions remain hidden or tasks cannot be verified.
-
-## Part D: Implement
-
-Use your configured Implementer agent or role prompt:
+Do not begin the OpenSpec implementation while product questions remain hidden or tasks cannot be verified. In the separate standard Claude Code session, use this prompt:
 
 ```text
-Implement only approved tickets from `docs/workshop/smart-game-night-story.md`.
-If the optional OpenSpec change exists, keep the implementation aligned with it.
+Implement every approved task in `openspec/changes/<change-name>/tasks.md`.
+Treat the approved OpenSpec artifacts as the source of truth for this delivery.
 Keep business rules testable outside HTTP and React.
 Stop and report ambiguities instead of inventing product behavior.
-Complete one ticket at a time, verify it, then update the story file and, if present, `tasks.md`.
+Complete and verify every task before declaring the feature complete.
 ```
+
+In the separate worktree, verify the complete feature and compare the outcome, verification evidence, and planning overhead with the story-driven run.
 
 ## Outcome
 
-An interview record, a reusable story-shaping skill, and a granular task plan. Teams completing the stretch goal also produce an implementation-ready OpenSpec change and a first verified implementation slice.
+An interview record, reusable `to-story` and `to-ticket` skills, and a fully implemented, verified story-driven feature. Teams completing the stretch goal also deliver the feature through OpenSpec in a separate run and compare both approaches.

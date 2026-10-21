@@ -5,8 +5,8 @@ This is a one-day workshop for experienced developers using Claude Code. All rep
 | Block | Topic | Output |
 | --- | --- | --- |
 | 09:00 | Explore | Shared map of the existing application |
-| 09:20 | Spec Driven Delivery | Interview, story, OpenSpec, tasks, and first implementation slice |
-| 13:15 | Backpressure: scoped quality gate | Claude Code Stop hook with automated checks |
+| 09:20 | Story-Driven Delivery | Interview, stories, and a fully implemented feature; OpenSpec repeat as a stretch goal |
+| 13:15 | Backpressure: quality gate | Claude Code quality gate; path-scoped gates as a stretch goal |
 | 14:00 | Multi-agent handoff | Implemented readiness change with visible handoffs |
 | 14:40 | Rubrics and advisory feedback | Actionable review findings |
 | 15:10 | Agent-alignment eval | Evidence of incompatible agent context and review churn |
