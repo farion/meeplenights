@@ -80,6 +80,11 @@ For each ticket, record the completed work and verification evidence in the tick
 
 Repeat the same feature delivery in a clean worktree or fresh clone, this time using OpenSpec as the source of truth. Do not reuse the story-driven implementation as the solution; the point is to compare the two delivery approaches.
 
+Install skills and cli by asking your agent:
+```
+Fetch https://raw.githubusercontent.com/Fission-AI/OpenSpec/main/install.md and follow it.
+```
+
 Use the following OpenSpec workflow in a standard Claude Code session:
 
 | Command | Purpose | What to do |
